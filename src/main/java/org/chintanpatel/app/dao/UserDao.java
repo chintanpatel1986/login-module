@@ -50,7 +50,7 @@ public class UserDao {
                         user.setLastName(rs.getString("last_name"));
                         user.setEmail(rs.getString("email"));
                         user.setMobile(rs.getLong("mobile"));
-                        user.setUserName(rs.getString("userName"));
+                        user.setUserName(rs.getString("user_name"));
                         user.setPassword(rs.getString("password"));
                         userList.add(user);
                     }
