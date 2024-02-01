@@ -13,7 +13,7 @@ public class DBConnection {
 
 
     public static Connection getConnection() {
-        Connection connection = DBConnection.getConnection();
+        Connection connection = null;
         try {
             Class.forName(DRIVER);
             connection = DriverManager.getConnection(URL,USER,PASSWORD);
