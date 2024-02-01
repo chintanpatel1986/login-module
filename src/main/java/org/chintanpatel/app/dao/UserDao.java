@@ -33,6 +33,41 @@ public class UserDao {
     }
 
 
+    public User findUserByUserName(String userName) {
+        User user = null;
+        ResultSet rs = null;
+        try (Connection conn = DBConnection.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("select * from tbl_user where user_name=?"))
+        {
+            pstmt.setString(1,userName);
+            rs = pstmt.executeQuery();
+                if (rs != null) {
+                    if (rs.next()) {
+                        user = new User();
+                        user.setUserId(rs.getInt("user_id"));
+                        user.setFirstName(rs.getString("first_name"));
+                        user.setLastName(rs.getString("last_name"));
+                        user.setEmail(rs.getString("email"));
+                        user.setMobile(rs.getLong("mobile"));
+                        user.setUserName(rs.getString("user_name"));
+                        user.setPassword(rs.getString("password"));
+                    }
+                }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return user;
+    }
+
+
     public boolean isAuthenticateUser(User user) {
         boolean flag = false;
         try (Connection conn = DBConnection.getConnection();
