@@ -16,6 +16,7 @@
 <body>
 <div class="container mt-5" align="right">
     Welcome, <b><%= session.getAttribute("currentSessionUser") %></b>
+    &nbsp;|&nbsp; <a href="GetUser?userName=${currentSessionUser}" class="link-success">Profile</a>
     &nbsp;|&nbsp; <a href="Logout" class="link-success">SignOut</a>
 </div>
 </body>
