@@ -68,6 +68,31 @@ public class UserDao {
     }
 
 
+    public boolean editUserProfile(User user) {
+        boolean flag = false;
+        try (Connection conn = DBConnection.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("update tbl_user set first_name=?, " +
+                "last_name=?, email=?, mobile=?, user_name=?, password=? where user_id=?"))
+        {
+                pstmt.setString(1, user.getFirstName());
+                pstmt.setString(2, user.getLastName());
+                pstmt.setString(3, user.getEmail());
+                pstmt.setLong(4,user.getMobile());
+                pstmt.setString(5, user.getUserName());
+                pstmt.setString(6, user.getPassword());
+                pstmt.setInt(7,user.getUserId());
+                int noOfRecordsAffected = pstmt.executeUpdate();
+                    if (noOfRecordsAffected > 0) {
+                        flag = true;
+                    }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+
+
     public boolean isAuthenticateUser(User user) {
         boolean flag = false;
         try (Connection conn = DBConnection.getConnection();
