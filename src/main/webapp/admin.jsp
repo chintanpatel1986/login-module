@@ -18,5 +18,8 @@
     Welcome, <b><%= session.getAttribute("currentSessionAdministrator")%></b>
     &nbsp;|&nbsp; <a href="Logout" class="link-success">SignOut</a>
 </div>
+<div class="container mt-5">
+    <a href="ListOfUsers" class="link-success fs-5">Users</a>
+</div>
 </body>
 </html>
