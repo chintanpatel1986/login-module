@@ -62,7 +62,6 @@ public class UserDao {
     }
 
 
-
     public User findUserByUserName(String userName) {
         User user = null;
         ResultSet rs = null;
@@ -122,6 +121,21 @@ public class UserDao {
     }
 
 
+    public boolean deleteUserById(int userId) {
+        boolean flag = false;
+        try (Connection conn = DBConnection.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("delete from tbl_user where user_id=?"))
+        {
+                pstmt.setInt(1,userId);
+                int noOfRecordsAffected = pstmt.executeUpdate();
+                    if (noOfRecordsAffected > 0) {
+                        flag = true;
+                    }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
 
     public boolean isAuthenticateUser(User user) {
         boolean flag = false;
